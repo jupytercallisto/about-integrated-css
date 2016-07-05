@@ -8,6 +8,468 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/about.css" />
+    <style>
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box; }
+    .column,
+    .columns {
+      width: 100%;
+      margin: 0 auto;
+      float: none;
+      box-sizing: border-box; }
+
+    /* For devices larger than 400px */
+    @media (min-width: 400px) {
+      .container {
+        width: 85%;
+        padding: 0; }
+    }
+
+    /* For devices larger than 550px */
+    @media (min-width: 550px) {
+      .container {
+        width: 80%; }
+      .column,
+      .columns {
+        margin-left: 4%; }
+      .column:first-child,
+      .columns:first-child {
+        margin-left: 0; }
+
+
+      .one-half.column {
+        width: 48%;
+    }
+
+
+    /*!
+    Implementing Full Page Scrolling
+     * fullPage 2.8.1
+     * https://github.com/alvarotrigo/fullPage.js
+     * MIT licensed
+     *
+     * Copyright (C) 2013 alvarotrigo.com - A project by Alvaro Trigo
+     */
+    html.fp-enabled,
+    .fp-enabled body {
+        margin: 0;
+        padding: 0;
+        overflow:hidden;
+
+        /*Avoid flicker on slides transitions for mobile phones #336 */
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    #superContainer {
+        height: 100%;
+        position: relative;
+
+        /* Touch detection for Windows 8 */
+        -ms-touch-action: none;
+
+        /* IE 11 on Windows Phone 8.1*/
+        touch-action: none;
+    }
+    .fp-section {
+        position: relative;
+        -webkit-box-sizing: border-box; /* Safari<=5 Android<=3 */
+        -moz-box-sizing: border-box; /* <=28 */
+        box-sizing: border-box;
+    }
+    .fp-slide {
+        float: left;
+    }
+    .fp-slide, .fp-slidesContainer {
+        height: 100%;
+        display: block;
+    }
+    .fp-slides {
+        z-index:1;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        -webkit-transition: all 0.3s ease-out; /* Safari<=6 Android<=4.3 */
+        transition: all 0.3s ease-out;
+    }
+    .fp-section.fp-table, .fp-slide.fp-table {
+        display: table;
+        table-layout:fixed;
+        width: 100%;
+    }
+    .fp-tableCell {
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+        height: 100%;
+    }
+    .fp-slidesContainer {
+        float: left;
+        position: relative;
+    }
+    .fp-controlArrow {
+        -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+        -moz-user-select: none; /* mozilla browsers */
+        -khtml-user-select: none; /* webkit (konqueror) browsers */
+        -ms-user-select: none; /* IE10+ */
+        position: absolute;
+        z-index: 4;
+        top: 50%;
+        cursor: pointer;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        margin-top: -38px;
+        -webkit-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+    .fp-controlArrow.fp-prev {
+        left: 15px;
+        width: 0;
+        border-width: 38.5px 34px 38.5px 0;
+        border-color: transparent #fff transparent transparent;
+    }
+    .fp-controlArrow.fp-next {
+        right: 15px;
+        border-width: 38.5px 0 38.5px 34px;
+        border-color: transparent transparent transparent #fff;
+    }
+    .fp-scrollable {
+        overflow: hidden;
+        position: relative;
+    }
+    .iScrollIndicator{
+        border: 0 !important;
+    }
+    .fp-notransition {
+        -webkit-transition: none !important;
+        transition: none !important;
+    }
+    #fp-nav {
+        position: fixed;
+        z-index: 100;
+        margin-top: -32px;
+        top: 50%;
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+    }
+    #fp-nav.right {
+        right: 17px;
+    }
+    #fp-nav.left {
+        left: 17px;
+    }
+    .fp-slidesNav{
+        position: absolute;
+        z-index: 4;
+        left: 50%;
+        opacity: 1;
+    }
+    .fp-slidesNav.bottom {
+        bottom: 17px;
+    }
+    .fp-slidesNav.top {
+        top: 17px;
+    }
+    #fp-nav ul,
+    .fp-slidesNav ul {
+      margin: 0;
+      padding: 0;
+    }
+    #fp-nav ul li,
+    .fp-slidesNav ul li {
+        display: block;
+        width: 14px;
+        height: 13px;
+        margin-bottom: 14px;
+        position:relative;
+    }
+    .fp-slidesNav ul li {
+        display: inline-block;
+    }
+    #fp-nav ul li a,
+    .fp-slidesNav ul li a {
+        display: block;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 auto;
+        float: none;
+    }
+    #fp-nav ul li a.active span,
+    .fp-slidesNav ul li a.active span,
+    #fp-nav ul li:hover a.active span,
+    .fp-slidesNav ul li:hover a.active span{
+        height: 12px;
+        width: 12px;
+        margin: -6px 0 0 -6px;
+        border-radius: 100%;
+        background: #e46e2e;
+     }
+    #fp-nav ul li a span,
+    .fp-slidesNav ul li a span {
+        border-radius: 50%;
+        position: absolute;
+        z-index: 1;
+        height: 6px;
+        width: 6px;
+        border: 0;
+        background: #BDBDBD;
+        left: 50%;
+        top: 50%;
+        margin: -3px 0 0 -3px;
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+    }
+    #fp-nav ul li:hover a span,
+    .fp-slidesNav ul li:hover a span{
+        width: 10px;
+        height: 10px;
+        margin: -5px 0px 0px -5px;
+    }
+    #fp-nav ul li .fp-tooltip {
+        position: absolute;
+        top: -2px;
+        color: #fff;
+        font-size: 14px;
+        font-family: arial, helvetica, sans-serif;
+        white-space: nowrap;
+        max-width: 220px;
+        overflow: hidden;
+        display: block;
+        opacity: 0;
+        width: 0;
+        cursor: pointer;
+    }
+    #fp-nav ul li:hover .fp-tooltip,
+    #fp-nav.fp-show-active a.active + .fp-tooltip {
+        -webkit-transition: opacity 0.2s ease-in;
+        transition: opacity 0.2s ease-in;
+        width: auto;
+        opacity: 1;
+    }
+    #fp-nav ul li .fp-tooltip.right {
+        right: 20px;
+    }
+    #fp-nav ul li .fp-tooltip.left {
+        left: 20px;
+    }
+    .fp-auto-height.fp-section,
+    .fp-auto-height .fp-slide,
+    .fp-auto-height .fp-tableCell{
+        height: auto !important;
+    }
+
+    .fp-responsive .fp-auto-height-responsive.fp-section,
+    .fp-responsive .fp-auto-height-responsive .fp-slide,
+    .fp-responsive .fp-auto-height-responsive .fp-tableCell {
+        height: auto !important;
+    }
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-1 {
+        width: 8.33%
+    }
+
+    .col-2 {
+        width: 16.66%;
+    }
+
+    .col-3 {
+        width: 25%;
+    }
+
+    .col-4 {
+        width: 33.33%;
+    }
+
+    .col-5 {
+        width: 41.66%;
+    }
+
+    .col-6 {
+        width: 50%;
+    }
+
+    .col-7 {
+        width: 58.33%;
+    }
+
+    .col-8 {
+        width: 66.66%;
+    }
+
+    .col-9 {
+        width: 75%;
+    }
+
+    .col-10 {
+        width: 83.33%;
+    }
+
+    .col-11 {
+        width: 91.66%;
+    }
+
+    .col-12 {
+        width: 100%;
+    }
+    body {
+        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        text-align: center;
+    }
+
+    .header {
+        font-size: 26px;
+        font-weight: 300;
+        color: #333333;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .desc-one {
+        font-size: 13px;
+        color: #555555;
+        line-height: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .desc-two {
+        font-size: 13px;
+        color: #555555;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-top: 0px;
+    }
+
+    .desc-two-header {
+        color: #333333;
+        font-size: 20px;
+        margin-bottom: 9px;
+        margin-top: 17px;
+    }
+
+    .row img {
+        margin-top: 20px
+    }
+
+    .header.content img {
+      vertical-align: middle;
+      padding-right: 30px;
+    }
+
+    .header.content {
+      vertical-align: middle;
+      line-height: 20px;
+    }
+
+    .content-img {
+      padding: 40px 0 35px 0;
+      height: 50px;
+    }
+
+    .content-desc {
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+      font-size: 13px;
+      max-width: 550px;
+      margin: 0 auto;
+      float: none;
+      color: #555555;
+      line-height: 20px;
+      padding-bottom: 8px;
+    }
+
+    .content-desc ul {
+      text-align: left;
+      margin-left: 92px;
+      float: none;
+    }
+
+    .desc-two-header {
+      padding: 30px 0 25px 0;
+    }
+
+    .desc-one p {
+      max-width: 740px;
+      margin: 0 auto;
+      float: none;
+    }
+
+    .column .desc-two-header a {
+        color: #555555;
+        text-decoration: none;
+    }
+
+    .desc-two-header:hover a{
+      color: #e46e2e;
+    }
+
+    .nav-button {
+      width: 68px;
+      height: 57px;
+      object-fit: cover;
+      object-position: 0 0;
+      overflow: hidden;
+      margin-top: 50px;
+      padding: 20px;
+      -webkit-animation: navbtn-anim ease 4s infinite;
+      animation: navbtn-anim ease 4s infinite;
+      -webkit-transition: all 300ms ease;
+      transition: all 300ms ease;
+    }
+
+    .nav-button:hover {
+      object-position: 0 -17px;
+    }
+
+    @keyframes navbtn-anim{
+      0% { transform: translate(0px,0px); }
+      50% { transform: translate(0px,20px); }
+      100% { transform: translate(0px,0px); }
+    }
+
+    @-webkit-keyframes navbtn-anim {
+      0% { transform: translate(0px,0px); }
+      50% { transform: translate(0px,20px); }
+      100% { transform: translate(0px,0px); }
+    }
+
+    a, a:visited {
+      font-weight: 500;
+      color: #e46e2e;
+      text-decoration: none;
+      -webkit-transition: all 200ms ease-out;
+      transition: all 200ms ease-out;
+    }
+
+    a:hover, a:active {
+      color: #ad4b16;
+      text-decoration: underline;
+    }
+
+
+    </style>
 </head>
 
 <body>
